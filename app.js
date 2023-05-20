@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/error.controller');
+const v1SwaggerDocs = require('./swagger');
 
 const authRouter = require('./routes/auth.routes');
 const commentRouter = require('./routes/comment.routes');
@@ -15,6 +16,8 @@ const postRouter = require('./routes/post.routes');
 const userRouter = require('./routes/user.routes');
 
 const app = express();
+const port = +process.env.PORT || 3100;
+
 const limiter = rateLimit({
   max: 100000,
   windowMs: 60 * 60 * 1000,
@@ -38,6 +41,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/comments', commentRouter);
+v1SwaggerDocs(app);
 
 app.all('*', (req, res, next) => {
   return next(
