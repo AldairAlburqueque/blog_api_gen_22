@@ -44,10 +44,10 @@ router
   .route('/')
   /**
    * @swagger
-   * /api/v1/post:
+   * /api/v1/posts:
    *  get:
-   *    summary: return all post
-   *    tag: [Post]
+   *    summary: return all posts
+   *    tags: [Post]
    *    responses:
    *      200:
    *        description: return all posts
